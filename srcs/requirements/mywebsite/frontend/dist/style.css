@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Monoton&family=Nanum+Pen+Script&family=Work+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* default fonts:
+font-family: 'Abril Fatface', cursive;
+font-family: 'Monoton', cursive;
+font-family: 'Nanum Pen Script', cursive;
+font-family: 'Work Sans', sans-serif;
+*/
+
+:root {
+  --background-color: #943a3e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: 'Work Sans', sans-serif;
+  color: white;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2 {
+  font-family: 'Monoton', cursive;
+  font-size: 4rem;
+  overflow-wrap: anywhere;
+  hyphens: manual;
+  margin: 1rem 0;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+.main-layout {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.news-heading {
+  display: flex;
+  justify-content: center;
+}
+
+#title-bad-ideas {
+  font-size: 18vw;
+}
+
+.news-heading * {
+  font-family: 'Abril Fatface', cursive;;
+}
+
+/* css for navigation bar */
+
+nav {
+  width: 100vw;
+  height: 5rem;
+  background-color: var(--background-color);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+nav * {
+  font-size: 2rem;
+}
+
+nav::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-top: 3px dashed white;
+  background: linear-gradient(var(--background-color), transparent 80%);
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+/* css for masonry display */
+
+.masonry {
+  padding: 2vh 4vw;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  width: 100%;
+}
+
+.item {
+  place-self: center;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+}
+
+/* css for masonry items */
+
+.short { grid-row-end: span var(--masonry-short); }
+.medium { grid-row-end: span var(--masonry-medium); }
+.tall { grid-row-end: span var(--masonry-tall); }
+
+/* Other css please insert after this line */
+
+.background {background: var(--background-color); }
+
+.item {
+  position: relative;
+  background: var(--background-color);
+  color: white;
+  padding: 1rem;
+  overflow: clip;
+}
+
+.item::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;    
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(transparent 80%, var(--background-color));
+  pointer-events: none;
+}
+
+.item:hover, .item:active {
+  animation: wiggle .6s;
+}
+
+.click-more-btn {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  padding: 0 1rem;
+  background: var(--background-color);
+  color: white;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 1.5rem;
+  border: 3px solid white;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.click-more-btn:hover, .click-more-btn:active {
+  background: white;
+  color: var(--background-color);
+}
+
+@keyframes wiggle {
+  0% {transform: rotate(1deg);}
+  25% {transform: rotate(-1deg);}
+  50% {transform: rotate(1deg);}
+  75% {transform: rotate(-1deg);}
+  100% {transform: rotate(0deg);}
+}
+
+/* css for popup window*/
+
+.popup {
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 5rem;
+  position: fixed;
+  visibility: hidden;
+  transition: visibility .5s, background-color .5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.popup-content {
+  height: fit-content;
+  width: 50vw;
+  max-height: 100%;
+  min-width: 300px;
+  padding: 2rem;
+  overflow-y: scroll;
+  color: black;
+  background: white;
+  border: 7px dashed black;
+  transform: translateY(-100vh);
+  transition: transform .5s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup[popupActive] .popup-content {
+  transform: translateY(0);
+}
+
+.popup[popupActive] {
+  visibility: visible;
+  background-color: rgba(0 0 0 / 64%);
+}
+
+.close-popup-btn {
+  width: 3rem;
+  height: 3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.close-popup-btn::before, .close-popup-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 3rem;
+  height: 2px;
+  background: white;
+}
+
+.close-popup-btn::before {transform: rotate(45deg);}
+.close-popup-btn::after  {transform: rotate(-45deg);}

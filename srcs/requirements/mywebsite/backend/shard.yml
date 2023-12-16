@@ -1,0 +1,16 @@
+name: tsangheiyiu.com
+version: 2.0.0
+
+authors:
+  - Anthony Tsang <anthonytsang0226@gmail.com>
+
+description: |
+  My personal website
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  faker:
+    github: askn/faker
+
+license: MIT

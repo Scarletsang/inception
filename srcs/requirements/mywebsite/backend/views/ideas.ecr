@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideas Masonry</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="bundle.js" type="module"></script>
+  <script type="module">
+    entry(<%= ideas_JSON %>);
+  </script>
+</head>
+<body class="background">
+  <div class="main-layout white-scrollbar">
+    <section class="news-heading">
+      <h1 id="title-bad-ideas">Bad Ideas!</h1>
+    </section>
+    <nav>
+      <h2>Inventory</h2>
+    </nav>
+    <main class="masonry"></main>
+  </div>
+  <div class="popup">
+    <div class="popup-content black-scrollbar"></div>
+    <button type="button" class="close-popup-btn"></button>
+  </div>
+</body>
+</html>

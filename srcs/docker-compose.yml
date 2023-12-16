@@ -1,0 +1,31 @@
+version: '3'
+
+networks:
+  inception:
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    platform: linux/amd64
+    build:
+      context: ./requirements/nginx
+    networks:
+      - inception
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+  mywebsite:
+    container_name: mywebsite
+    image: mywebsite
+    platform: linux/amd64
+    build:
+      context: ./requirements/mywebsite
+    networks:
+      - inception
+    expose:
+      - 8000
+    depends_on:
+      - nginx
+    restart: unless-stopped
