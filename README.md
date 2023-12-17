@@ -2,6 +2,14 @@
 
 This is a project to set up a Docker networks of web services.
 
+## Docker
+
+This is an old article that I wrote about Docker: [article](./docs/your_first_dockerfile.md). It explained how Docker works, what is Dockerfile, docker image and docker containers.
+
+A Docker network is used when I have different programs running in different containers and they need to talk to each other. Therefore, docker network is used often to test or even deploy web applications. A Docker compose file is used to define all the settings for each containers inside the network.
+
+To get a feel for using using Docker and Docker compose, I recommand to just briefly follow through this [guide](https://sabe.io/tutorials/serve-static-files-nginx-docker) once.
+
 ## NGINX
 
 Nginx is a reversed proxy that sits in front of multiple backend servers, any incoming connections will first send to the reversed proxy server, and it will redirect the packets to and from the corresponding backenbd servers.
