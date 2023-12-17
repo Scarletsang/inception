@@ -1,9 +1,15 @@
 FROM alpine:latest
 
 RUN ["apk", "add", "--update", "nginx", "openssl"]
+RUN ["mkdir", "-p", "/etc/nginx/ssl"]
 
-COPY ./conf/mywebsite.conf /etc/nginx/http.d/
+COPY ./helper/ssl.sh /usr/local/bin/
+RUN ["chmod", "+x", "/usr/local/bin/ssl.sh"]
+RUN /usr/local/bin/ssl.sh mywebsite.com
 
-EXPOSE 80 443
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/conf.d/ /etc/nginx/conf.d/
+
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]

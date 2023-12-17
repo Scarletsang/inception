@@ -13,15 +13,15 @@ services:
     networks:
       - inception
     ports:
-      - "80:80"
+      - "443:443"
     restart: unless-stopped
 
-  mywebsite:
-    container_name: mywebsite
-    image: mywebsite
+  mywebsite.com:
+    container_name: mywebsite.com
+    image: mywebsite.com
     platform: linux/amd64
     build:
-      context: ./requirements/mywebsite
+      context: ./requirements/mywebsite.com
     networks:
       - inception
     expose:
