@@ -4,7 +4,7 @@ RUN ["apk", "add", "--update", "nginx", "openssl"]
 RUN ["mkdir", "-p", "/etc/nginx/ssl"]
 
 # Add adminstration scripts
-COPY ./helper/*.sh /usr/local/bin/
+COPY ./tools/*.sh /usr/local/bin/
 RUN ["chmod", "+x", "/usr/local/bin/ssl.sh"]
 RUN ["chmod", "+x", "/usr/local/bin/start.sh"]
 
