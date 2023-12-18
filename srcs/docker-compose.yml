@@ -3,6 +3,10 @@ version: '3'
 networks:
   inception:
 
+volumes:
+  wordpress:
+  wordpress_db:
+
 services:
   nginx:
     container_name: nginx
@@ -28,6 +32,40 @@ services:
       - inception
     expose:
       - 8000
+    depends_on:
+      - nginx
+    restart: unless-stopped
+  
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    platform: linux/amd64
+    build:
+      context: ./requirements/wordpress
+    volumes:
+      - wordpress:/var/www/html
+      - wordpress_db:/var/lib/mysql
+    networks:
+      - inception
+    expose:
+      - 9000
+    depends_on:
+      - nginx
+      - mariadb
+    restart: unless-stopped
+  
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    platform: linux/amd64
+    build:
+      context: ./requirements/mariadb
+    volumes:
+      - wordpress_db:/var/lib/mysql
+    networks:
+      - inception
+    expose:
+      - 3306
     depends_on:
       - nginx
     restart: unless-stopped

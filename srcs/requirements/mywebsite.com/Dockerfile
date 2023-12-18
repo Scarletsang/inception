@@ -1,17 +1,30 @@
 FROM alpine:latest AS build-stage
-COPY frontend /frontend
+# install npm
+RUN apk update && apk upgrade && \
+    apk add nodejs npm
+
+# install frontend dependencies
 WORKDIR /frontend
-RUN ["apk", "add", "--update", "nodejs", "npm"]
+COPY frontend/package.json frontend/package-lock.json .
 RUN ["npm", "install"]
+
+# build frontend
+COPY frontend .
 RUN ["./node_modules/.bin/rollup", "-c", "./rollup.config.js"]
 
 FROM alpine:latest
-RUN ["apk", "add", "--update", "crystal", "shards"]
-RUN ["apk", "add", "--update", "libressl-dev"]
-COPY backend /backend
-COPY --from=build-stage /frontend/dist /backend/public
+# install crystal
+RUN apk update && apk upgrade && \
+    apk add crystal shards libressl-dev
+
+# install backend dependencies
 WORKDIR /backend
+COPY backend/shard.yml backend/shard.lock .
 RUN ["shards", "install"]
+
+# build backend
+COPY backend/ .
+COPY --from=build-stage /frontend/dist /backend/public
 RUN ["crystal", "build", "src/app.cr", "--release"]
 
 EXPOSE 8000

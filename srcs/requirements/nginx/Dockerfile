@@ -1,12 +1,12 @@
 FROM alpine:latest
 
-RUN ["apk", "add", "--update", "nginx", "openssl"]
+RUN apk update && apk upgrade && \
+    apk add nginx openssl
 RUN ["mkdir", "-p", "/etc/nginx/ssl"]
 
 # Add adminstration scripts
 COPY ./tools/*.sh /usr/local/bin/
-RUN ["chmod", "+x", "/usr/local/bin/ssl.sh"]
-RUN ["chmod", "+x", "/usr/local/bin/start.sh"]
+RUN chmod +x /usr/local/bin/*.sh
 
 # Add nginx configuration
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf

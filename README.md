@@ -10,6 +10,10 @@ A Docker network is used when I have different programs running in different con
 
 To get a feel for using using Docker and Docker compose, I recommand to just briefly follow through this [guide](https://sabe.io/tutorials/serve-static-files-nginx-docker) once.
 
+### Dockerfile
+
+[Best practice](https://docs.docker.com/build/cache/)
+
 ## NGINX
 
 Nginx is a reversed proxy that sits in front of multiple backend servers, any incoming connections will first send to the reversed proxy server, and it will redirect the packets to and from the corresponding backenbd servers.
@@ -31,3 +35,9 @@ SSL/TLS is a protocol to secure HTTP connections. The protocol is https.
 [More details about the TLS](https://www.cloudflare.com/en-gb/learning/ssl/how-does-ssl-work/)
 
 [SSL formats](https://serverfault.com/questions/9708/what-is-a-pem-file-and-how-does-it-differ-from-other-openssl-generated-key-file)
+
+## Wordpress
+
+[Wordpress cli](https://wp-cli.org/)
+
+[Installing wordpress from wordpress cli](https://make.wordpress.org/cli/handbook/how-to/how-to-install/)
