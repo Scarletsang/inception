@@ -1,3 +1,5 @@
+#!/bin/sh
+
 PRIVATE_KEY=/etc/nginx/ssl/${1}_private.key
 CERTIFICATE=/etc/nginx/ssl/${1}_certificate.crt
 
