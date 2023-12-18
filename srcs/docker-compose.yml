@@ -10,6 +10,8 @@ services:
     platform: linux/amd64
     build:
       context: ./requirements/nginx
+    env_file:
+      - .env
     networks:
       - inception
     ports:
