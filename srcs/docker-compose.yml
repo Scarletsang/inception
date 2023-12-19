@@ -42,6 +42,8 @@ services:
     platform: linux/amd64
     build:
       context: ./requirements/wordpress
+    env_file:
+      - .env
     volumes:
       - wordpress:/var/www/html
       - wordpress_db:/var/lib/mysql
@@ -60,8 +62,11 @@ services:
     platform: linux/amd64
     build:
       context: ./requirements/mariadb
+    env_file:
+      - .env
     volumes:
       - wordpress_db:/var/lib/mysql
+    user: "mysql:mysql"
     networks:
       - inception
     expose:
