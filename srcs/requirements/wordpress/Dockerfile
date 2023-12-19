@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3
 
 # install PHP, download WP-CLI
 RUN apk update && apk upgrade && \
