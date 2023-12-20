@@ -9,3 +9,6 @@ config:
 
 network:
 	docker network inspect inception_inception
+
+inspect:
+	docker exec -it $(NAME) sh
