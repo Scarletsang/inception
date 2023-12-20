@@ -23,4 +23,5 @@ RUN chmod +x wp-cli.phar && \
 
 COPY tools/wordpress_entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/wordpress_entrypoint.sh
-CMD /usr/local/bin/wordpress_entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/wordpress_entrypoint.sh"]

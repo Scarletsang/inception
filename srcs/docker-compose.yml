@@ -16,10 +16,15 @@ services:
       context: ./requirements/nginx
     env_file:
       - .env
+    volumes:
+      - wordpress:/var/www/html
     networks:
       - inception
     ports:
       - "443:443"
+    depends_on:
+      - mywebsite.com
+      - wordpress
     restart: unless-stopped
 
   mywebsite.com:
@@ -32,8 +37,6 @@ services:
       - inception
     expose:
       - 8000
-    depends_on:
-      - nginx
     restart: unless-stopped
   
   wordpress:
@@ -46,13 +49,11 @@ services:
       - .env
     volumes:
       - wordpress:/var/www/html
-      - wordpress_db:/var/lib/mysql
     networks:
       - inception
     expose:
       - 9000
     depends_on:
-      - nginx
       - mariadb
     restart: unless-stopped
   
@@ -66,11 +67,8 @@ services:
       - .env
     volumes:
       - wordpress_db:/var/lib/mysql
-    user: "mysql:mysql"
     networks:
       - inception
     expose:
       - 3306
-    depends_on:
-      - nginx
     restart: unless-stopped

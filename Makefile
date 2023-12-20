@@ -4,6 +4,9 @@ all:
 clean:
 	docker compose -f srcs/docker-compose.yml -p inception down
 
+fclean:
+	docker compose -f srcs/docker-compose.yml -p inception down -v
+
 config:
 	docker compose -f srcs/docker-compose.yml config
 

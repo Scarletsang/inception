@@ -36,6 +36,13 @@ SSL/TLS is a protocol to secure HTTP connections. The protocol is https.
 
 [SSL formats](https://serverfault.com/questions/9708/what-is-a-pem-file-and-how-does-it-differ-from-other-openssl-generated-key-file)
 
+## Mariadb
+
+[Remote access for Mariadb](https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/)
+
+- network interface
+- loopback network
+
 ## Wordpress
 
 [Wordpress cli](https://wp-cli.org/)

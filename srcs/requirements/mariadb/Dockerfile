@@ -11,14 +11,14 @@ RUN mkdir -p /var/lib/mysql && \
     chown -R mysql:mysql /var/lib/mysql && \
     chown -R mysql:mysql /var/run/mysqld
 
-# Initialize the system tables
-RUN mariadb-install-db --user=mysql
-
 # Copy the custom MariaDB configuration file
 COPY conf/my.cnf /etc/my.cnf
+
+# Initialize the system tables
+# RUN mariadb-install-db
 
 # Expose the default MariaDB port
 EXPOSE 3306
 
-# Start MariaDB when the container starts
-CMD ["mysqld"]
+# CMD ["mariadbd"]
+CMD tail -f /dev/null

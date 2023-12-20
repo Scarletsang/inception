@@ -14,4 +14,4 @@ COPY ./conf/conf.d/ /etc/nginx/conf.d/
 
 EXPOSE 443
 
-CMD /usr/local/bin/start.sh
+ENTRYPOINT ["/usr/local/bin/nginx_entrypoint.sh"]
