@@ -15,10 +15,12 @@ RUN mkdir -p /var/lib/mysql && \
 COPY conf/my.cnf /etc/my.cnf
 
 # Initialize the system tables
-# RUN mariadb-install-db
+RUN mariadb-install-db --bootstrap --datadir=/var/lib/mysql --user=mysql
+
+COPY tools/mariadb_entrypoint.sh /usr/local/bin/mariadb_entrypoint.sh
+RUN chmod +x /usr/local/bin/mariadb_entrypoint.sh
 
 # Expose the default MariaDB port
 EXPOSE 3306
 
-# CMD ["mariadbd"]
-CMD tail -f /dev/null
+ENTRYPOINT ["/usr/local/bin/mariadb_entrypoint.sh"]
