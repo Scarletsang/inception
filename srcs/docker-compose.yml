@@ -55,6 +55,7 @@ services:
       - 9000
     depends_on:
       - mariadb
+      - redis
     restart: unless-stopped
   
   mariadb:
@@ -71,4 +72,17 @@ services:
       - inception
     expose:
       - 3306
+    restart: unless-stopped
+  
+  redis:
+    container_name: redis
+    image: redis
+    platform: linux/amd64
+    build:
+      context: ./requirements/redis
+    command: --requirepass ${REDIS_PASSWORD}
+    networks:
+      - inception
+    expose:
+      - 6379
     restart: unless-stopped

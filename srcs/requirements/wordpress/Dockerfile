@@ -15,8 +15,12 @@ RUN apk update && apk upgrade && \
         php${PHP_VERSION}-mbstring \
         php${PHP_VERSION}-dom \
         php${PHP_VERSION}-session \
+        php${PHP_VERSION}-ctype \
+        php${PHP_VERSION}-tokenizer \
+        php${PHP_VERSION}-redis \
         php${PHP_VERSION}-fpm \
         mariadb-client \
+        redis \
         curl && \
     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
@@ -33,5 +37,5 @@ RUN chmod +x /usr/local/bin/wordpress_entrypoint.sh && \
       /etc/php${PHP_VERSION}/php-fpm.d/www.conf && \
     sed -i "s|;listen.group = nobody|listen.group = nobody|g" \
       /etc/php${PHP_VERSION}/php-fpm.d/www.conf
-
+WORKDIR /var/www/html
 ENTRYPOINT ["/usr/local/bin/wordpress_entrypoint.sh"]
