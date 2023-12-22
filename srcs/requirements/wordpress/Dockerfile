@@ -1,18 +1,22 @@
 FROM alpine:3
 
+ARG PHP_VERSION=${PHP_VERSION:-82}
+ENV PHP_VERSION=${PHP_VERSION:-82}
+
 # install PHP, download WP-CLI
 RUN apk update && apk upgrade && \
     apk add --no-cache \
-        php \
-        php-mysqli \
-        php-json \
-        php-phar \
-        php-curl \
-        php-gd \
-        php-mbstring \
-        php-dom \
-        php-session \
-        php-fpm \
+        php${PHP_VERSION} \
+        php${PHP_VERSION}-mysqli \
+        php${PHP_VERSION}-json \
+        php${PHP_VERSION}-phar \
+        php${PHP_VERSION}-curl \
+        php${PHP_VERSION}-gd \
+        php${PHP_VERSION}-mbstring \
+        php${PHP_VERSION}-dom \
+        php${PHP_VERSION}-session \
+        php${PHP_VERSION}-fpm \
+        mariadb-client \
         curl && \
     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
