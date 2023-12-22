@@ -15,3 +15,14 @@ network:
 
 inspect:
 	docker exec -it $(NAME) sh
+
+nginx_logs:
+	docker exec -it nginx cat /var/log/nginx/error.log
+
+wp_logs:
+	docker exec -it wordpress cat /var/log/php82/error.log
+
+hosts:
+	cat /etc/hosts
+
+re: fclean all
