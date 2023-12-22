@@ -2,6 +2,7 @@
 
 cd /var/www/html
 wp core download --locale=en_GB
+chmod -R 0777 wp-content/
 wp config create \
     --dbname=${WP_DB_NAME} \
     --dbuser=${WP_DB_USER} \

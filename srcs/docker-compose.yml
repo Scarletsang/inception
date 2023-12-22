@@ -8,36 +8,36 @@ volumes:
   wordpress_db:
 
 services:
-  # nginx:
-  #   container_name: nginx
-  #   image: nginx
-  #   platform: linux/amd64
-  #   build:
-  #     context: ./requirements/nginx
-  #   env_file:
-  #     - .env
-  #   volumes:
-  #     - wordpress:/var/www/html
-  #   networks:
-  #     - inception
-  #   ports:
-  #     - "443:443"
-  #   depends_on:
-  #     - mywebsite.com
-  #     - wordpress
-  #   restart: unless-stopped
+  nginx:
+    container_name: nginx
+    image: nginx
+    platform: linux/amd64
+    build:
+      context: ./requirements/nginx
+    env_file:
+      - .env
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    ports:
+      - "443:443"
+    depends_on:
+      - mywebsite.com
+      - wordpress
+    restart: unless-stopped
 
-  # mywebsite.com:
-  #   container_name: mywebsite.com
-  #   image: mywebsite.com
-  #   platform: linux/amd64
-  #   build:
-  #     context: ./requirements/mywebsite.com
-  #   networks:
-  #     - inception
-  #   expose:
-  #     - 8000
-  #   restart: unless-stopped
+  mywebsite.com:
+    container_name: mywebsite.com
+    image: mywebsite.com
+    platform: linux/amd64
+    build:
+      context: ./requirements/mywebsite.com
+    networks:
+      - inception
+    expose:
+      - 8000
+    restart: unless-stopped
   
   wordpress:
     container_name: wordpress
@@ -51,8 +51,8 @@ services:
       - wordpress:/var/www/html
     networks:
       - inception
-    ports:
-      - "9000:9000"
+    expose:
+      - 9000
     depends_on:
       - mariadb
     restart: unless-stopped

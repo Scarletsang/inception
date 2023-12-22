@@ -1,7 +1,7 @@
 FROM alpine:3
 
 RUN apk update && apk upgrade && \
-    apk add nginx openssl
+    apk add nginx openssl envsubst
 RUN ["mkdir", "-p", "/etc/nginx/ssl"]
 
 # Add adminstration scripts
