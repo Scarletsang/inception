@@ -15,8 +15,7 @@ RUN mkdir -p /var/lib/mysql && \
 COPY conf/my.cnf /etc/my.cnf
 
 # Initialize the system tables
-RUN mariadb-install-db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm && \
-    sed -i "s|skip-networking|skip-networking=0|g" /etc/my.cnf.d/mariadb-server.cnf
+RUN mariadb-install-db
 
 COPY tools/mariadb_entrypoint.sh /usr/local/bin/mariadb_entrypoint.sh
 RUN chmod +x /usr/local/bin/mariadb_entrypoint.sh
