@@ -24,21 +24,10 @@ services:
       - "443:443"
     depends_on:
       - mywebsite.com
+      - read-me-from-middle.com
       - wordpress
     restart: unless-stopped
 
-  mywebsite.com:
-    container_name: mywebsite.com
-    image: mywebsite.com
-    platform: linux/amd64
-    build:
-      context: ./requirements/mywebsite.com
-    networks:
-      - inception
-    expose:
-      - 8000
-    restart: unless-stopped
-  
   wordpress:
     container_name: wordpress
     image: wordpress
@@ -85,4 +74,30 @@ services:
       - inception
     expose:
       - 6379
+    restart: unless-stopped
+
+  mywebsite.com:
+    container_name: mywebsite.com
+    image: mywebsite.com
+    platform: linux/amd64
+    build:
+      context: ./requirements/mywebsite.com
+    command: ["-p", "80"]
+    networks:
+      - inception
+    expose:
+      - 80
+    restart: unless-stopped
+  
+  read-me-from-middle.com:
+    container_name: read-me-from-middle.com
+    image: read-me-from-middle.com
+    platform: linux/amd64
+    build:
+      context: ./requirements/read-me-from-middle.com
+    command: ["-p", "80"]
+    networks:
+      - inception
+    expose:
+      - 80
     restart: unless-stopped
