@@ -1,4 +1,4 @@
-FROM alpine:3 AS build-stage
+FROM alpine:3.18 AS build-stage
 # install npm
 RUN apk update && apk upgrade && \
     apk add nodejs npm
@@ -12,7 +12,7 @@ RUN ["npm", "install"]
 COPY frontend .
 RUN ["./node_modules/.bin/rollup", "-c", "./rollup.config.js"]
 
-FROM alpine:3
+FROM alpine:3.18
 # install crystal
 RUN apk update && apk upgrade && \
     apk add crystal shards libressl-dev
