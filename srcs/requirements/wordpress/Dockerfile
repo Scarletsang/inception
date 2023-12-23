@@ -27,6 +27,7 @@ RUN apk update && apk upgrade && \
 # Install WP-CLI
 RUN chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp && \
+    ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php && \
     wp --info
 
 COPY tools/wordpress_entrypoint.sh /usr/local/bin/
