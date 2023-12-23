@@ -5,7 +5,16 @@ networks:
 
 volumes:
   wordpress:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/${USER}/data/wordpress
+
   wordpress_db:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/${USER}/data/mariadb
 
 services:
   nginx:
