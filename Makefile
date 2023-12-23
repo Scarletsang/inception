@@ -22,6 +22,9 @@ nginx_logs:
 wp_logs:
 	docker exec -it wordpress cat /var/log/php82/error.log
 
+middle_logs:
+	docker exec -it read-me-from-middle.com cat /var/log/thttpd/thttpd.log
+
 hosts:
 	cat /etc/hosts
 
