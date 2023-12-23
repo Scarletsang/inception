@@ -1,11 +1,5 @@
 #!/bin/sh
 
-CURRENT_DIR="$(cd "$(dirname "$0")" && pwd)"
-
-$CURRENT_DIR/ssl.sh mywebsite.com
-$CURRENT_DIR/ssl.sh wordpress
-$CURRENT_DIR/ssl.sh read-me-from-middle.com
-
 CONFS=/etc/nginx/conf.d/*.conf
 
 for f in $CONFS
