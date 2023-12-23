@@ -33,7 +33,7 @@ apt-get install -y make
 # Configure test domain names
 cat <<'EOF' >> /etc/hosts
 127.0.2.1   htsang.42.de
-127.0.2.1   badidea.dev
+127.0.2.1   badidea.org
 127.0.2.1   read-me-from-middle.com
 EOF
 
@@ -44,7 +44,7 @@ git clone https://github.com/Scarletsang/inception.git && cd inception
 echo <<'EOF' > srcs/.env
 # domain names
 WORDPRESS_DOMAIN_NAME=htsang.42.de
-MYWEBSITE_DOMAIN_NAME=badidea.dev
+MYWEBSITE_DOMAIN_NAME=badidea.org
 READ_ME_FROM_MIDDLE_DOMAIN_NAME=read-me-from-middle.com
 
 # wordpress database settings
