@@ -22,12 +22,12 @@ RUN apk update && apk upgrade && \
         mariadb-client \
         redis \
         curl && \
+    ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php && \
     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 # Install WP-CLI
 RUN chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp && \
-    ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php && \
     wp --info
 
 COPY tools/wordpress_entrypoint.sh /usr/local/bin/
