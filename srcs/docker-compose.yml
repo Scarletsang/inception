@@ -125,6 +125,7 @@ services:
       - inception
     ports:
       - "21:21"
+      - "20:20"
     depends_on:
       - wordpress
     restart: unless-stopped

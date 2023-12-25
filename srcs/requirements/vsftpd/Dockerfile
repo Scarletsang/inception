@@ -14,4 +14,3 @@ COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
 EXPOSE 21
 
 CMD ["vsftpd", "/etc/vsftpd/vsftpd.conf"]
-CMD tail -f /dev/null
