@@ -1,8 +1,9 @@
 #!/bin/bash
 
+USER_NAME=htsang
 # Give sudo access to htsang
-usermod -aG sudo htsang
-usermod -aG docker htsang
+usermod -aG sudo $USER_NAME
+usermod -aG docker $USER_NAME
 
 # Install docker
 cd /usr/local/bin
@@ -31,19 +32,19 @@ chmod +x docker_install.sh
 apt-get install -y make
 
 # Configure test domain names
-cat <<'EOF' >> /etc/hosts
-127.0.2.1   htsang.42.de
+cat <<EOF >> /etc/hosts
+127.0.2.1   ${USER_NAME}.42.de
 127.0.2.1   badidea.org
 127.0.2.1   read-me-from-middle.com
 EOF
 
-cd /home/htsang
-mkdir -p /home/htsang/data/{wordpress,mariadb,redis}
+cd /home/$USER_NAME
+mkdir -p /home/${USER_NAME}/data/{wordpress,mariadb,redis}
 git clone https://github.com/Scarletsang/inception.git && cd inception
 
-echo <<'EOF' > srcs/.env
+echo <<EOF > srcs/.env
 # domain names
-WORDPRESS_DOMAIN_NAME=htsang.42.de
+WORDPRESS_DOMAIN_NAME=${USER_NAME}.42.de
 MYWEBSITE_DOMAIN_NAME=badidea.org
 READ_ME_FROM_MIDDLE_DOMAIN_NAME=read-me-from-middle.com
 
@@ -56,15 +57,13 @@ WP_DB_ROOT_PASSWORD=mypass
 REDIS_PASSWORD=mypass
 
 # wordpress settings
-WP_URL=https://htsang.42.de
+WP_URL=https://${USER_NAME}.42.de
 WP_TITLE=My Wordpress Site
-WP_ADMIN_USER=htsang
+WP_ADMIN_USER=${USER_NAME}
 WP_ADMIN_PASSWORD=mypass
-WP_ADMIN_EMAIL=htsang@htsang.42.de
+WP_ADMIN_EMAIL=${USER_NAME}@${USER_NAME}.42.de
 
 # ftp user settings
 FTP_USER=ftpuser
 FTP_PASSWORD=mypass
 EOF
-
-make
