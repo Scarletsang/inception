@@ -35,6 +35,7 @@ services:
       - mywebsite.com
       - read-me-from-middle.com
       - wordpress
+      - adminer
     restart: unless-stopped
 
   wordpress:
