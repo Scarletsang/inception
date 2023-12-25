@@ -11,7 +11,9 @@ RUN apk update && apk upgrade && \
     chown -R ${FTP_USER}:${FTP_USER} /var/www/html
 
 COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY ./tools/*.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/*.sh
 
-EXPOSE 21
+EXPOSE 21 30000-30010
 
-CMD ["vsftpd", "/etc/vsftpd/vsftpd.conf"]
+ENTRYPOINT ["/usr/local/bin/vsftpd-entrypoint.sh"]
