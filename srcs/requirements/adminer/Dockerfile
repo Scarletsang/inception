@@ -9,4 +9,4 @@ RUN apk update && apk upgrade && \
 EXPOSE 8080
 
 ENTRYPOINT ["php", "-S"]
-CMD ["localhost:8080"]
+CMD ["0.0.0.0:8080"]
