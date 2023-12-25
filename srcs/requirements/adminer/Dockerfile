@@ -21,7 +21,7 @@ RUN apk update && apk upgrade && \
         php${PHP_VERSION}-opcache \
         php${PHP_VERSION}-gd \
         php${PHP_VERSION}-simplexml \
-        php${PHP_VERSION}-fileinfo
+        php${PHP_VERSION}-fileinfo \
         curl && \
     ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php && \
     curl -o adminer.php https://www.adminer.org/latest.php -L
