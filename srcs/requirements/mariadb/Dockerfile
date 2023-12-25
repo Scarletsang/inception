@@ -1,9 +1,8 @@
 FROM alpine:3.18
 
-RUN apk update && apk upgrade
-
 # Install MariaDB
-RUN apk --no-cache add mariadb mariadb-client
+RUN apk update && apk upgrade && \
+    apk --no-cache add mariadb mariadb-client
 
 # Create a directory for MariaDB data
 RUN mkdir -p /var/lib/mysql && \
