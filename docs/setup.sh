@@ -38,7 +38,7 @@ cat <<'EOF' >> /etc/hosts
 EOF
 
 cd /home/htsang
-mkdir -p /home/htsang/data/wordpress /home/htsang/data/mariadb
+mkdir -p /home/htsang/data/{wordpress,mariadb,redis}
 git clone https://github.com/Scarletsang/inception.git && cd inception
 
 echo <<'EOF' > srcs/.env
@@ -61,6 +61,10 @@ WP_TITLE=My Wordpress Site
 WP_ADMIN_USER=htsang
 WP_ADMIN_PASSWORD=mypass
 WP_ADMIN_EMAIL=htsang@htsang.42.de
+
+# ftp user settings
+FTP_USER=ftpuser
+FTP_PASSWORD=mypass
 EOF
 
 make

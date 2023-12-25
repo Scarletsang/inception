@@ -62,7 +62,7 @@ services:
       - mariadb
       - redis
     restart: unless-stopped
-  
+
   mariadb:
     container_name: mariadb
     image: mariadb
@@ -93,7 +93,7 @@ services:
     expose:
       - 6379
     restart: unless-stopped
-  
+
   adminer:
     container_name: adminer
     image: adminer
@@ -104,6 +104,29 @@ services:
       - inception
     expose:
       - 8080
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+
+  vsftpd:
+    container_name: vsftpd
+    image: vsftpd
+    platform: linux/amd64
+    build:
+      context: ./requirements/vsftpd
+    env_file:
+      - .env
+    args:
+      - FTP_USER=${FTP_USER}
+      - FTP_PASSWORD=${FTP_PASSWORD}
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    ports:
+      - "21:21"
+    depends_on:
+      - wordpress
     restart: unless-stopped
 
   mywebsite.com:
@@ -118,7 +141,7 @@ services:
     expose:
       - 80
     restart: unless-stopped
-  
+
   read-me-from-middle.com:
     container_name: read-me-from-middle.com
     image: read-me-from-middle.com
