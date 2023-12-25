@@ -8,6 +8,8 @@ RUN apk update && apk upgrade && \
     adduser -h /var/html/www -s /sbin/nologin -D ${FTP_USER} && \
     echo "${FTP_USER}:${FTP_PASSWORD}" | chpasswd
 
+COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
+
 EXPOSE 21
 
 CMD ["vsftpd", "/etc/vsftpd/vsftpd.conf"]

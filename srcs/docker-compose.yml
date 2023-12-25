@@ -114,11 +114,11 @@ services:
     platform: linux/amd64
     build:
       context: ./requirements/vsftpd
+      args:
+        - FTP_USER=${FTP_USER}
+        - FTP_PASSWORD=${FTP_PASSWORD}
     env_file:
       - .env
-    args:
-      - FTP_USER=${FTP_USER}
-      - FTP_PASSWORD=${FTP_PASSWORD}
     volumes:
       - wordpress:/var/www/html
     networks:
