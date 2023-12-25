@@ -4,7 +4,7 @@ ARG FTP_USER
 ARG FTP_PASSWORD
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache vsftpd && \
+    apk add --no-cache vsftpd curl && \
     mkdir -p /var/www/html && \
     adduser -h /var/www/html -s /sbin/nologin -D ${FTP_USER} && \
     echo "${FTP_USER}:${FTP_PASSWORD}" | chpasswd && \
@@ -16,4 +16,4 @@ RUN chmod +x /usr/local/bin/*.sh
 
 EXPOSE 21 30000-30010
 
-ENTRYPOINT ["/usr/local/bin/vsftpd-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/vsftpd_entrypoint.sh"]

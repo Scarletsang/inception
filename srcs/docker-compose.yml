@@ -126,6 +126,7 @@ services:
     ports:
       - "21:21"
       - "20:20"
+      - "30000-30010:30000-30010"
     depends_on:
       - wordpress
     restart: unless-stopped
