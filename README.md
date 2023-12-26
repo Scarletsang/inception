@@ -82,7 +82,7 @@ Time is gold. Having a good order of the layers reduce time for image rebuilding
 
 Now you have a Dockerfile, then you need to know some Docker commands to turn it into Docker container.
 
-### Building an image
+### 1. Building an image
 
 Build a Docker image from a Dockerfile found in the specified directory.
 
@@ -92,7 +92,7 @@ docker build /dir -t image_name
 docker build . -t image_name
 ```
 
-### Executes an Docker image into a Docker container
+### 2. Executes an Docker image into a Docker container
 
 ```bash
 # The process of the container is now attached to your current shell.
@@ -104,7 +104,7 @@ docker run -itd --name=container_name image_name
 docker run -itd -v /path/on/host:/app/data --name=container_name image_name
 ```
 
-### Execute a command within a Docker container
+### 3. Execute a command within a Docker container
 
 Note that the container has to be running.
 
@@ -115,7 +115,7 @@ docker exec -it container_name command
 docker exec -it container_name bash
 ```
 
-### Stop or pausing a container
+### 4. Stop or pausing a container
 
 ```bash
 docker stop container_name
