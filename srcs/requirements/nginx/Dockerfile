@@ -1,14 +1,15 @@
 FROM alpine:3.18
 
+# Package installation
 RUN apk update && apk upgrade && \
     apk add nginx openssl envsubst
-RUN ["mkdir", "-p", "/etc/nginx/ssl"]
 
 # Add adminstration scripts
 COPY ./tools/*.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/*.sh
 
 # generate ssl certificates
-RUN chmod +x /usr/local/bin/*.sh && \
+RUN mkdir -p /etc/nginx/ssl && \
     /usr/local/bin/ssl.sh mywebsite.com && \
     /usr/local/bin/ssl.sh wordpress && \
     /usr/local/bin/ssl.sh read-me-from-middle.com

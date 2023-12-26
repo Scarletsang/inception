@@ -50,3 +50,30 @@ If one needs variables during the build-time of a Docker image, one must explici
 ## Docker Image cache
 
 [Reference](https://docs.docker.com/build/cache/)
+
+Docker tries to cache all the layers you have built. E.g. You created an image with 5 layers. All layers are cached, so when nothing is changed, nothing is needed to rebuilt. Now you changed the 3rd layer, Docker will rebuilt the 3rd to 5th layers. Therefore it is always a good practice to put the layers that you will less likely to change first, then put the parts that need to change frequently at last. Layers that would not change much is usually package installation, user creation etc. Copying source codes, configuration files, compiling code etc. should be put at last. This is a quick example:
+
+```Dockerfile
+# 1. Import layers from a base image
+FROM alpine:3.18
+
+# 2. Copy files that is necessary ONLY for package installation
+COPY package.json .
+
+# 3. Package installation
+RUN apt-get install nodejs npm && \
+	npm install
+
+# 4. Instructions after package installation, including
+# - copying adminastration scripts
+# - setting up users
+
+# 5. Configuration files
+COPY ./conf/*.conf /etc/
+
+# 6. Instruction that runs when the container starts
+ENTRYPOINT ["./app"]
+CMD ["-p", "8080"]
+```
+
+Time is gold. So having a good order of the layers is the most important. Then you can optimize for image size. The less layers an image have, the smaller the image is.

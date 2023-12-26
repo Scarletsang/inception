@@ -3,7 +3,7 @@ FROM alpine:3.18
 ARG PHP_VERSION=${PHP_VERSION:-82}
 ENV PHP_VERSION=${PHP_VERSION:-82}
 
-# install PHP, download WP-CLI
+# Package installation
 RUN apk update && apk upgrade && \
     apk add --no-cache \
         php${PHP_VERSION} \
@@ -23,14 +23,14 @@ RUN apk update && apk upgrade && \
         redis \
         curl && \
     ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php && \
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-
-# Install WP-CLI
-RUN chmod +x wp-cli.phar && \
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp && \
     wp --info
 
 COPY tools/wordpress_entrypoint.sh /usr/local/bin/
+
+# Change php fpm configuration
 RUN chmod +x /usr/local/bin/wordpress_entrypoint.sh && \
     sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" \
         /etc/php${PHP_VERSION}/php-fpm.d/www.conf && \

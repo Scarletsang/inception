@@ -3,6 +3,7 @@ FROM alpine:3.18
 ARG PHP_VERSION=${PHP_VERSION:-82}
 ENV PHP_VERSION=${PHP_VERSION:-82}
 
+# Package installation
 RUN apk update && apk upgrade && \
     apk add --no-cache \
         php${PHP_VERSION} \
