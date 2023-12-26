@@ -76,4 +76,52 @@ ENTRYPOINT ["./app"]
 CMD ["-p", "8080"]
 ```
 
-Time is gold. So having a good order of the layers is the most important. Then you can optimize for image size. The less layers an image have, the smaller the image is.
+Time is gold. Having a good order of the layers reduce time for image rebuilding. After this, then you can optimize for image size. The less layers an image have, the smaller the image is.
+
+## Docker commands
+
+Now you have a Dockerfile, then you need to know some Docker commands to turn it into Docker container.
+
+### Building an image
+
+Build a Docker image from a Dockerfile found in the specified directory.
+
+```bash
+docker build /dir -t image_name
+# Dockerfile in the current directory
+docker build . -t image_name
+```
+
+### Executes an Docker image into a Docker container
+
+```bash
+# The process of the container is now attached to your current shell.
+# Once closed, your Docker container is also stopped.
+docker run -it --name=container_name image_name
+# Run the Docker cotnainer in the background
+docker run -itd --name=container_name image_name
+# Mounting a directory on the host machine to a directory in the container
+docker run -itd -v /path/on/host:/app/data --name=container_name image_name
+```
+
+### Execute a command within a Docker container
+
+Note that the container has to be running.
+
+```bash
+docker exec -it container_name command
+# This is very common when you want to 'go inside' the container
+# If bash is not installed in the container, you have to run sh
+docker exec -it container_name bash
+```
+
+### Stop or pausing a container
+
+```bash
+docker stop container_name
+docker start container_name
+
+# Pause is freezing the state of the container
+docker pause container_name
+docker unpause container_name
+```
